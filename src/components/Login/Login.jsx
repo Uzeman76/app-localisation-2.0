@@ -9,9 +9,16 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://89.80.248.46:84/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      /*
+      TODO : modifier l'url
+      remplacer http://89.80.248.46:84 par 1 variable global que tu mettra dans  un fichier que tu appellera .env à la racine du projet
+      EX : API_LOCATE_URL=http://89.80.248.46:84
+
+      Cela te permettras d'éviter sur chaque fichier ou tu utiliseras l'url en dur
+      */
+      const response = await fetch("http://89.80.248.46:84/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
       
@@ -20,10 +27,35 @@ const Login = () => {
     } catch (error) {
       console.log("Erreur réseau");
     }
+    /*
+    TODO : Toujours dans un but de faignantise, tu pourrais faire du découpage 
+
+    EX :
+
+      ici
+        let body = JSON.stringify({ email, password })
+        result = await connection(body)
+
+      dans un fichier Controller/Form/Auth.js
+        export function connexion(body){
+          const route = 'auth/login'
+          return await postForm(route, body)
+        }
+        (on pourras imaginer par la suite un connexion,register,deleteAccount ... 
+        mais aussi et surtout, dans un Controller/Form/User.js, un getUser,updateUser,deleteUser ...)
+
+      dans un fichier Service/Form/Form.js
+
+        export function postForm(route, body){
+        -- ta logique mais en faisant en sorte que ny l'url soit en dur ny  --
+          return result
+        }
+        (on pourras imaginer par la suite un getForm,deleteForm,updateForm ... )
+    */
   };
 
   return (
-
+    //je ne connais pas très bien les bonnes pratiques en react, mais je vais me renseigner ;)
     <div className="App">
       <header className="App-header">
         {/* Ouverture du formulaire */}
