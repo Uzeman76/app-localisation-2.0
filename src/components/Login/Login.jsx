@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState } from "react";
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,7 +21,7 @@ const Login = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-      
+
       const result = await response.json();
       console.log(result);
     } catch (error) {
@@ -62,8 +62,12 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           {/* Champ email */}
           <label class="formu">
-              email :
-            <input type="email" name="email" placeholder="test@gmail.com" required
+            email :
+            <input
+              type="email"
+              name="email"
+              placeholder="test@gmail.com"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -71,18 +75,25 @@ const Login = () => {
 
           <br />
           {/* Champ mot de passe */}
-          <label  class="formu">
+          <label class="formu">
             mot de passe :
-            <input type="password" name="password" placeholder="01234567" required value={password} // Liaison ajoutée
-              onChange={(e) => setPassword(e.target.value)}/> 
+            <input
+              type="password"
+              name="password"
+              placeholder="01234567"
+              required
+              value={password} // Liaison ajoutée
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </label>
 
           <br />
           {/* Bouton d'envoi du formulaire */}
-          <input type="submit" value="Envoyer" class="bouton"/>
+          <input type="submit" value="Envoyer" class="bouton" />
         </form>
       </header>
-    </div>  );
+    </div>
+  );
 };
 
 export default Login;

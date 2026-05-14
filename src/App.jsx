@@ -4,8 +4,7 @@ import Subscribe from "./components/Subscribe/Subscribe";
 import React, { useState } from "react";
 
 function App() {
-  return ( <Login /> );
-          
+  return <Login />;
 }
 
 export default App;
