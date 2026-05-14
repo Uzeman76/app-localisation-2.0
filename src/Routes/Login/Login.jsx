@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getApiUrl } from '../Api/Api';
+import { login } from '../../Services/UserService';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -7,18 +7,16 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+  const response = await login(email, password);
+    alert(JSON.stringify(response));
 
-    try {
-      const response = await fetch( getApiUrl("auth/login"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const result = await response.json();
-      console.log(result);
-    } catch (error) {
-      console.log("Erreur réseau");
+    if (response.retour.code === 200) {
+      //TODO rediriger vers la page d'accueil et enregistrer 
+      // l'utilisateur dans le contexte ou le stockage local
+      alert("Connexion réussie");
+    } else {
+      //TODO afficher un message d'erreur
+      alert("Erreur lors de la connexion");
     }
   };
 
@@ -47,7 +45,7 @@ const Login = () => {
             <input
               type="password"
               name="password"
-              placeholder="01234567"
+              placeholder="********"
               required
               value={password} // Liaison ajoutée
               onChange={(e) => setPassword(e.target.value)}
